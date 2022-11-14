@@ -1,0 +1,2 @@
+﻿using PrimeLab;
+Menu.Run();
