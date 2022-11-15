@@ -66,6 +66,7 @@ namespace PrimeLab
                     break;
             }
         }
+
         public static void Initializer(int input)
         {
             PrimeGenerator primeGenerator = new PrimeGenerator(input);

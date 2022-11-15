@@ -40,14 +40,6 @@ namespace PrimeLab
 
 
         }
-        //public static int GetTheUserChoice(string? input)
-        //{
-        //    int temp;
-        //    while (!int.TryParse(input, out temp) && input != null)
-        //    {
-        //        input = Console.ReadLine();
-        //    }
-        //    return temp;
-        //}
+
     }
 }
