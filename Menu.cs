@@ -11,8 +11,14 @@ namespace PrimeLab
         public static void Run()
         {
 
-            Console.WriteLine("Please Enter your choice: ");
+            OptionsManager();
             
+        }
+
+        public static void OptionsManager()
+        {
+            Console.WriteLine("Please Enter your choice: ");
+
             int temp = 0;
             while (temp > 3 || temp < 1)
             {
@@ -30,7 +36,6 @@ namespace PrimeLab
                     Console.WriteLine("you chose three");
                     break;
             }
-            
         }
 
         public static int GetTheUserChoice(string? input)

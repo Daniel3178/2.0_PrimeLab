@@ -14,9 +14,9 @@ namespace PrimeLab
             Console.WriteLine("You are in Prime Lab, please Enter your choice: ");
 
             int temp = 0;
-            while (temp > 4 || temp < 1)
+            while (temp > 5 || temp < 1)
             {
-                temp = GetTheUserChoice(Console.ReadLine());
+                temp = Menu.GetTheUserChoice(Console.ReadLine());
             }
             switch (temp)
             {
@@ -30,20 +30,24 @@ namespace PrimeLab
                     Console.WriteLine("you chose three");
                     break;
                 case 4:
+                    Console.WriteLine("you chose four");
+                    break;
+                case 5:
                     Menu.Run();
                     break;
+
             }
 
 
         }
-        public static int GetTheUserChoice(string? input)
-        {
-            int temp;
-            while (!int.TryParse(input, out temp) && input != null)
-            {
-                input = Console.ReadLine();
-            }
-            return temp;
-        }
+        //public static int GetTheUserChoice(string? input)
+        //{
+        //    int temp;
+        //    while (!int.TryParse(input, out temp) && input != null)
+        //    {
+        //        input = Console.ReadLine();
+        //    }
+        //    return temp;
+        //}
     }
 }
