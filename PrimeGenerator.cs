@@ -10,13 +10,13 @@ namespace PrimeLab
 {
     internal class PrimeGenerator : IOptions
     {
-        Stopwatch stopwatch;
-        public static ulong[]? GeneratedPrimeNumbers { get; set; }
-
+        Stopwatch? stopwatch;
+        public static ulong[] GeneratedPrimeNumbers { get; set; }
+        private static string? timeInfo;
 
         public PrimeGenerator(int numberOfPrimesToGenerate)
         {
-            stopwatch = new Stopwatch();
+            
             GeneratedPrimeNumbers = new ulong[numberOfPrimesToGenerate];
             foreach (int i in GeneratedPrimeNumbers)
             {
@@ -31,7 +31,7 @@ namespace PrimeLab
 
             Console.WriteLine("How many prime numbers would you like to generate? ");
             int NumberOfPrimesToGenerate = -1;
-            while (NumberOfPrimesToGenerate < 0)
+            while (NumberOfPrimesToGenerate <= 0)
             {
                 NumberOfPrimesToGenerate = Menu.GetTheUserChoice(Console.ReadLine());
             }
@@ -53,24 +53,30 @@ namespace PrimeLab
             switch (temp)
             {
                 case 1:
-                    PrimeLab.Run();
+                    ViewTheResult(GeneratedPrimeNumbers);
                     break;
                 case 2:
-                    Console.WriteLine("you chose two");
+                    SaveTheResult(GeneratedPrimeNumbers);
                     break;
                 case 3:
                     Console.WriteLine("you chose three");
                     break;
                 case 4:
-                    Console.WriteLine("you chose four");
+                    PrimeLab.Run();
                     break;
             }
         }
 
         public static void Initializer(int input)
         {
+            
             PrimeGenerator primeGenerator = new PrimeGenerator(input);
+            Stopwatch stopwatch = new Stopwatch();
+            stopwatch.Start();
             GeneratePrimeNumbers(input);
+            stopwatch.Stop();
+            timeInfo = stopwatch.ElapsedMilliseconds.ToString();
+
             Console.WriteLine("The task has been successfuly done!!");
         }
 
@@ -79,20 +85,43 @@ namespace PrimeLab
 
         public static void ViewTheResult(IEnumerable<ulong> input)
         {
-            foreach (ulong value in input)
+            if (input != null)
             {
-                Console.WriteLine(value + ", ");
+                foreach (ulong value in input)
+                {
+                    Console.WriteLine(value + ", ");
+                }
             }
+            OptionsManager();
         }
 
         public static void SaveTheResult(IEnumerable<ulong> input)
         {
-            string tempS = "";
-            foreach (ulong value in input)
+            if (input != null)
             {
-                tempS += value.ToString() + ", ";
+                string tempS = "";
+                foreach (ulong value in input)
+                {
+                    tempS += value.ToString() + ", ";
+                }
+                File.WriteAllText(@"F:\Programering Archive\SideProjects\2.0_PrimeLab\PrimeLab\SavedPrimeNumbers\PrimeNumbers", tempS);
             }
-            File.WriteAllText(@"F:\Programering Archive\SideProjects\2.0_PrimeLab\PrimeLab\SavedPrimeNumbers\PrimeNumbers", tempS);
+            OptionsManager();
+        }
+
+        public static void ViewTheDetails(){
+            System.Console.WriteLine("The total number of generated prime numbers is: " + GeneratedPrimeNumbers.Length);
+            System.Console.WriteLine("The first generated prime number is: " + GeneratedPrimeNumbers[0]);
+            System.Console.WriteLine("The last generated prime number is: " + GeneratedPrimeNumbers[GeneratedPrimeNumbers.Length - 1]);
+            System.Console.WriteLine("The time taken for this task is: "+ timeInfo);
+            System.Console.WriteLine("[PRESS 1] to get back to options");
+                        int? temp = 0;
+            while (temp != 1 || temp == null)
+            {
+                temp = Menu.GetTheUserChoice(Console.ReadLine());
+            }
+            OptionsManager();
+
         }
 
         #region:PrimeStuff

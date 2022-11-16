@@ -10,9 +10,10 @@ namespace PrimeLab
     {
         public static void Run()
         {
-
+            ShowTheSummary();
+            ShowTheOptionsDialog();
             OptionsManager();
-            
+
         }
 
         public static void OptionsManager()
@@ -30,10 +31,10 @@ namespace PrimeLab
                     PrimeLab.Run();
                     break;
                 case 2:
-                    Console.WriteLine("you chose two");
+                    ShowTheManual();
                     break;
                 case 3:
-                    Console.WriteLine("you chose three");
+                    Console.WriteLine("you chose to exit");
                     break;
             }
         }
@@ -41,11 +42,46 @@ namespace PrimeLab
         public static int GetTheUserChoice(string? input)
         {
             int temp;
-            while (!int.TryParse(input, out temp) || input==null)
+            while (!int.TryParse(input, out temp) || input == null)
             {
                 input = Console.ReadLine();
             }
             return temp;
         }
+
+        public static void ShowTheManual()
+        {
+            System.Console.WriteLine("This is the Manual");
+
+            int temp = 0;
+            while (temp > 2 || temp < 1)
+            {
+                temp = GetTheUserChoice(Console.ReadLine());
+            }
+            switch (temp)
+            {
+                case 1:
+                    Menu.Run();
+                    break;
+                case 2:
+                    Console.WriteLine("you chose to exit");
+                    break;
+            }
+        }
+
+        public static void ShowTheSummary()
+        {
+            System.Console.WriteLine("****************************************************************");
+            System.Console.WriteLine("\t" + "\t" + "      This is the summary");
+            System.Console.WriteLine("****************************************************************");
+        }
+
+        public static void ShowTheOptionsDialog()
+        {
+            Console.WriteLine("\t" + "[PRESS 1] PrimeLab");
+            Console.WriteLine("\t" + "[PRESS 2] Manual");
+            Console.WriteLine("\t" + "[PRESS 3] Exit");
+        }
+
     }
 }
