@@ -16,7 +16,7 @@ namespace PrimeLab
 
         public PrimeGenerator(int numberOfPrimesToGenerate)
         {
-            
+
             GeneratedPrimeNumbers = new ulong[numberOfPrimesToGenerate];
             foreach (int i in GeneratedPrimeNumbers)
             {
@@ -42,9 +42,26 @@ namespace PrimeLab
 
         }
 
+        #region:Initializer&OptionsManager
+        public static void Initializer(int input)
+        {
+
+            PrimeGenerator primeGenerator = new PrimeGenerator(input);
+            Stopwatch stopwatch = new Stopwatch();
+            stopwatch.Start();
+            GeneratePrimeNumbers(input);
+            stopwatch.Stop();
+            timeInfo = stopwatch.ElapsedMilliseconds.ToString();
+
+            Console.WriteLine("The task has been successfuly done!!");
+        }
+
         public static void OptionsManager()
         {
-            Console.WriteLine("Choose what you want to do: ");
+            Console.WriteLine("\t" + "[PRESS 1] Show the result");
+            Console.WriteLine("\t" + "[PRESS 2] Save the result");
+            Console.WriteLine("\t" + "[PRESS 3] Show the details");
+            Console.WriteLine("\t" + "[PRESS 4] Get back to PrimeLab");
             int temp = 0;
             while (temp > 4 || temp < 1)
             {
@@ -59,7 +76,7 @@ namespace PrimeLab
                     SaveTheResult(GeneratedPrimeNumbers);
                     break;
                 case 3:
-                    Console.WriteLine("you chose three");
+                    ViewTheDetails();
                     break;
                 case 4:
                     PrimeLab.Run();
@@ -67,21 +84,9 @@ namespace PrimeLab
             }
         }
 
-        public static void Initializer(int input)
-        {
-            
-            PrimeGenerator primeGenerator = new PrimeGenerator(input);
-            Stopwatch stopwatch = new Stopwatch();
-            stopwatch.Start();
-            GeneratePrimeNumbers(input);
-            stopwatch.Stop();
-            timeInfo = stopwatch.ElapsedMilliseconds.ToString();
+        #endregion
 
-            Console.WriteLine("The task has been successfuly done!!");
-        }
-
-
-
+        #region:MethodsForCase1->3
 
         public static void ViewTheResult(IEnumerable<ulong> input)
         {
@@ -89,7 +94,7 @@ namespace PrimeLab
             {
                 foreach (ulong value in input)
                 {
-                    Console.WriteLine(value + ", ");
+                    Console.Write(value + ", ");
                 }
             }
             OptionsManager();
@@ -109,24 +114,26 @@ namespace PrimeLab
             OptionsManager();
         }
 
-        public static void ViewTheDetails(){
-            System.Console.WriteLine("The total number of generated prime numbers is: " + GeneratedPrimeNumbers.Length);
-            System.Console.WriteLine("The first generated prime number is: " + GeneratedPrimeNumbers[0]);
-            System.Console.WriteLine("The last generated prime number is: " + GeneratedPrimeNumbers[GeneratedPrimeNumbers.Length - 1]);
-            System.Console.WriteLine("The time taken for this task is: "+ timeInfo);
-            System.Console.WriteLine("[PRESS 1] to get back to options");
-                        int? temp = 0;
+        public static void ViewTheDetails()
+        {
+            Console.WriteLine("The total number of generated prime numbers is: " + GeneratedPrimeNumbers.Length);
+            Console.WriteLine("The first generated prime number is: " + GeneratedPrimeNumbers[0]);
+            Console.WriteLine("The last generated prime number is: " + GeneratedPrimeNumbers[GeneratedPrimeNumbers.Length - 1]);
+            Console.WriteLine("The time taken for this task is: " + timeInfo);
+            Console.WriteLine("[PRESS 1] to get back to options");
+
+            int? temp = 0;
             while (temp != 1 || temp == null)
             {
                 temp = Menu.GetTheUserChoice(Console.ReadLine());
             }
             OptionsManager();
-
         }
+        #endregion
 
         #region:PrimeStuff
 
-        public static void GeneratePrimeNumbers(int numberOfPrimesToGenerate)
+        private static void GeneratePrimeNumbers(int numberOfPrimesToGenerate)
         {
             int temp = 1;
             for (ulong i = 3; i < ulong.MaxValue; i += 2)
@@ -155,7 +162,7 @@ namespace PrimeLab
             return true;
         }
 
-        #endregion:PrimeStuff
+        #endregion
 
 
 

@@ -11,7 +11,12 @@ namespace PrimeLab
         public static void Run()
         {
 
-            Console.WriteLine("You are in Prime Lab, please Enter your choice: ");
+            Console.WriteLine("\t" + "[PRESS 1] Generate the first n prime numbers");
+            Console.WriteLine("\t" + "[PRESS 2] Generate all the prime numbers in a specific range");
+            Console.WriteLine("\t" + "[PRESS 3] Check if a number is prime");
+            Console.WriteLine("\t" + "[PRESS 4] Prime factorizing a number");
+            Console.WriteLine("\t" + "[PRESS 5] Get back to menu");
+
 
             int temp = 0;
             while (temp > 5 || temp < 1)
@@ -21,7 +26,7 @@ namespace PrimeLab
             switch (temp)
             {
                 case 1:
-                    Console.WriteLine("you chose One");
+                    PrimeGenerator.Run();
                     break;
                 case 2:
                     Console.WriteLine("you chose two");
