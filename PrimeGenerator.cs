@@ -51,7 +51,7 @@ namespace PrimeLab
             stopwatch.Start();
             GeneratePrimeNumbers(input);
             stopwatch.Stop();
-            timeInfo = stopwatch.ElapsedMilliseconds.ToString();
+            timeInfo = stopwatch.ElapsedMilliseconds.ToString() + " ms";
 
             Console.WriteLine("The task has been successfuly done!!");
         }

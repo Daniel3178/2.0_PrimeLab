@@ -7,7 +7,7 @@ using System.Diagnostics;
 
 namespace PrimeLab
 {
-    internal class PrimeFactorizer
+    internal class PrimeFactorizer : IOptions
     {
         static List<ulong> primeNumbers = new List<ulong>();
         private static string? timeInfo;
