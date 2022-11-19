@@ -29,7 +29,7 @@ namespace PrimeLab
                 {
                     startOfTheRange = GetTheUserInput(Console.ReadLine());
                     endOfTheRange = GetTheUserInput(Console.ReadLine());
-                    //Console.WriteLine("Please enter the appropriate values");
+
                 }
 
                 Initializer(startOfTheRange, endOfTheRange);
@@ -107,7 +107,8 @@ namespace PrimeLab
 
                     }
                 }
-                CountTheLength(endPoint);
+
+                endPoint = generatedPrimeNumbersR.Count - 1;
             }
             else if (start % 2 != 0)
             {
@@ -119,7 +120,8 @@ namespace PrimeLab
 
                     }
                 }
-                CountTheLength(endPoint);
+
+                endPoint = generatedPrimeNumbersR.Count - 1;
             }
 
 
@@ -182,13 +184,10 @@ namespace PrimeLab
                 }
 
             }
-            CountTheLength(startPoint);
+            startPoint = generatedPrimeNumbersR.Count;
         }
 
-        private static void CountTheLength(int input)
-        {
-            input = generatedPrimeNumbersR.Count - 1;
-        }
+
         private static bool IsPrime(ulong numToTest)
         {
             for (int i = 0; generatedPrimeNumbersR[i] * generatedPrimeNumbersR[i] <= numToTest; i++)

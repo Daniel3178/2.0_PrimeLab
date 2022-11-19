@@ -10,7 +10,6 @@ namespace PrimeLab
 {
     internal class PrimeGenerator : IOptions
     {
-        Stopwatch? stopwatch;
         public static ulong[] GeneratedPrimeNumbers { get; set; }
         private static string? timeInfo;
         public static bool primeGeneratorOptionIsActive = false;

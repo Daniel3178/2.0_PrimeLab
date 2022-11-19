@@ -8,11 +8,11 @@ namespace PrimeLab
 {
     internal interface IOptions
     {
-        public static void ViewTheResult(/*IEnumerable<ulong> input*/)
+        public static void ViewTheResult(IEnumerable<ulong> input)
         {
 
         }
-        public static void SaveTheResult(/*IEnumerable<ulong> input*/)
+        public static void SaveTheResult(IEnumerable<ulong> input)
         {
 
         }
