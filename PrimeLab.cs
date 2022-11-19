@@ -8,40 +8,49 @@ namespace PrimeLab
 {
     internal class PrimeLab
     {
+        public static bool primeLabIsActive = false;
         public static void Run()
         {
-
-            Console.WriteLine("\t" + "[PRESS 1] Generate the first n prime numbers");
-            Console.WriteLine("\t" + "[PRESS 2] Generate all the prime numbers in a specific range");
-            Console.WriteLine("\t" + "[PRESS 3] Check if a number is prime");
-            Console.WriteLine("\t" + "[PRESS 4] Prime factorizing a number");
-            Console.WriteLine("\t" + "[PRESS 5] Get back to menu");
-
-
-            int temp = 0;
-            while (temp > 5 || temp < 1)
+            primeLabIsActive = true;
+            while (primeLabIsActive)
             {
-                temp = Menu.GetTheUserChoice(Console.ReadLine());
-            }
-            switch (temp)
-            {
-                case 1:
-                    PrimeGenerator.Run();
-                    break;
-                case 2:
-                    Console.WriteLine("you chose two");
-                    break;
-                case 3:
-                    Console.WriteLine("you chose three");
-                    break;
-                case 4:
-                    Console.WriteLine("you chose four");
-                    break;
-                case 5:
-                    Menu.Run();
-                    break;
 
+                Console.WriteLine("\t" + "[PRESS 1] Generate the first n prime numbers");
+                Console.WriteLine("\t" + "[PRESS 2] Generate all the prime numbers in a specific range");
+                Console.WriteLine("\t" + "[PRESS 3] Check if a number is prime");
+                Console.WriteLine("\t" + "[PRESS 4] Prime factorizing a number");
+                Console.WriteLine("\t" + "[PRESS 5] Get back to menu");
+
+                int temp = 0;
+                while (temp > 5 || temp < 1)
+                {
+                    temp = Menu.GetTheUserChoice(Console.ReadLine());
+                }
+                switch (temp)
+                {
+                    case 1:
+                        PrimeGenerator.Run();
+                        break;
+                    case 2:
+                        PrimeGenerator_Range.Run();
+
+                        break;
+                    case 3:
+                        Console.WriteLine("you chose three");
+
+                        break;
+                    case 4:
+                        PrimeFactorizer.Run();
+
+                        break;
+
+                    case 5:
+                        primeLabIsActive = false;
+                        break;
+
+                }
             }
+
 
 
         }
