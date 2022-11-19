@@ -24,7 +24,7 @@ namespace PrimeLab
             primeFactorizerIsActive = true;
             while (primeFactorizerIsActive)
             {
-                Console.WriteLine("Please enter the number: ");
+                Console.Write("\t"+"Enter the number to factorize : ");
                 ulong numberToPrimeFactorize = 0;
                 while (numberToPrimeFactorize <= 1)
                 {
@@ -56,7 +56,8 @@ namespace PrimeLab
                 Console.WriteLine("\t" + "[PRESS 2] Save the result");
                 Console.WriteLine("\t" + "[PRESS 3] Show the details");
                 Console.WriteLine("\t" + "[PRESS 4] Generate new prime factors");
-                Console.WriteLine("\t" + "[PRESS 5] Get back to PrimeLab");
+                Console.WriteLine("\t" + "[PRESS 5] Get back to PrimeLab\n");
+                Console.Write("\t" + "Your Choice : ");
 
                 int temp = 0;
                 while (temp > 5 || temp < 1)
@@ -126,11 +127,12 @@ namespace PrimeLab
 
         public static void ViewTheDetails()
         {
-            Console.WriteLine("The total number of generated prime factors is: " + primeFactors.Count);
-            Console.WriteLine("The least prime factor is: " + primeFactors[0]);
-            Console.WriteLine("The greatest prime factor is: " + primeFactors[primeFactors.Count - 1]);
-            Console.WriteLine("The time taken for this task is: " + timeInfo);
-            Console.WriteLine("[PRESS 1] to get back to options");
+            Console.WriteLine("\t"+"The total number of generated prime factors is: " + primeFactors.Count);
+            Console.WriteLine("\t" + "The least prime factor is: " + primeFactors[0]);
+            Console.WriteLine("\t" + "The greatest prime factor is: " + primeFactors[primeFactors.Count - 1]);
+            Console.WriteLine("\t" + "The time taken for this task is: " + timeInfo);
+            Console.WriteLine("\t" + "[PRESS 1] to get back to options");
+            Console.Write("\t" + "Your Choice : ");
 
             int? temp = 0;
             while (temp != 1 || temp == null)

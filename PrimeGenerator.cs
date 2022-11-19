@@ -33,7 +33,7 @@ namespace PrimeLab
             while (primeGeneratorIsActive)
             {
 
-                Console.WriteLine("How many prime numbers would you like to generate? ");
+                Console.Write("\t" + "The number of primes to generate : ");
                 int NumberOfPrimesToGenerate = -1;
                 while (NumberOfPrimesToGenerate <= 0)
                 {
@@ -58,7 +58,7 @@ namespace PrimeLab
             stopwatch.Stop();
             timeInfo = stopwatch.ElapsedMilliseconds.ToString() + " ms";
 
-            Console.WriteLine("The task has been successfuly done!!");
+            Console.WriteLine("\t" + "*** The task has been successfuly done!! ***\n");
         }
 
         public static void OptionsManager()
@@ -71,7 +71,9 @@ namespace PrimeLab
                 Console.WriteLine("\t" + "[PRESS 2] Save the result");
                 Console.WriteLine("\t" + "[PRESS 3] Show the details");
                 Console.WriteLine("\t" + "[PRESS 4] Generate new prime numbers");
-                Console.WriteLine("\t" + "[PRESS 5] Get back to PrimeLab");
+                Console.WriteLine("\t" + "[PRESS 5] Get back to PrimeLab\n");
+                Console.Write("\t" + "Your Choice : ");
+
 
                 int temp = 0;
                 while (temp > 5 || temp < 1)
@@ -136,11 +138,12 @@ namespace PrimeLab
 
         public static void ViewTheDetails()
         {
-            Console.WriteLine("The total number of generated prime numbers is: " + GeneratedPrimeNumbers.Length);
-            Console.WriteLine("The first generated prime number is: " + GeneratedPrimeNumbers[0]);
-            Console.WriteLine("The last generated prime number is: " + GeneratedPrimeNumbers[GeneratedPrimeNumbers.Length - 1]);
-            Console.WriteLine("The time taken for this task is: " + timeInfo);
-            Console.WriteLine("[PRESS 1] to get back to options");
+            Console.WriteLine("\t" + "The total number of generated prime numbers is: " + GeneratedPrimeNumbers.Length);
+            Console.WriteLine("\t" + "The first generated prime number is: " + GeneratedPrimeNumbers[0]);
+            Console.WriteLine("\t" + "The last generated prime number is: " + GeneratedPrimeNumbers[GeneratedPrimeNumbers.Length - 1]);
+            Console.WriteLine("\t" + "The time taken for this task is: " + timeInfo);
+            Console.WriteLine("\t" + "[PRESS 1] to get back to options\n");
+            Console.Write("\t" + "Your Choice : ");
 
             int? temp = 0;
             while (temp != 1 || temp == null)

@@ -16,10 +16,11 @@ namespace PrimeLab
             {
 
                 Console.WriteLine("\t" + "[PRESS 1] Generate the first n prime numbers");
-                Console.WriteLine("\t" + "[PRESS 2] Generate all the prime numbers in a specific range");
+                Console.WriteLine("\t" + "[PRESS 2] Generate prime numbers in a specific range");
                 Console.WriteLine("\t" + "[PRESS 3] Check if a number is prime");
                 Console.WriteLine("\t" + "[PRESS 4] Prime factorizing a number");
-                Console.WriteLine("\t" + "[PRESS 5] Get back to menu");
+                Console.WriteLine("\t" + "[PRESS 5] Get back to menu\n");
+                Console.Write("\t" +"Your Choice : ");
 
                 int temp = 0;
                 while (temp > 5 || temp < 1)

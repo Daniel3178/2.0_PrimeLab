@@ -22,12 +22,13 @@ namespace PrimeLab
             primeGenerator_RangIsActive = true;
             while (primeGenerator_RangIsActive)
             {
-                Console.WriteLine("Please enter the number: ");
                 ulong startOfTheRange = 0;
                 ulong endOfTheRange = 0;
                 while (startOfTheRange <= 1 || endOfTheRange <= startOfTheRange)
                 {
+                    Console.Write("\t" + "Enter the beginning number of the interval : ");
                     startOfTheRange = GetTheUserInput(Console.ReadLine());
+                    Console.Write("\t" + "Enter the end number of the interval : ");
                     endOfTheRange = GetTheUserInput(Console.ReadLine());
 
                 }
@@ -44,7 +45,7 @@ namespace PrimeLab
             stopwatch.Stop();
             timeInfo = stopwatch.ElapsedMilliseconds.ToString() + "ms";
 
-            Console.WriteLine("The task has been successfuly done!!");
+            Console.WriteLine("\t" + "The task has been successfuly done!!");
         }
 
         public static void OptionsManager()
@@ -57,7 +58,8 @@ namespace PrimeLab
                 Console.WriteLine("\t" + "[PRESS 2] Save the result");
                 Console.WriteLine("\t" + "[PRESS 3] Show the details");
                 Console.WriteLine("\t" + "[PRESS 4] Generate new prime numbers in a range");
-                Console.WriteLine("\t" + "[PRESS 5] Get back to PrimeLab");
+                Console.WriteLine("\t" + "[PRESS 5] Get back to PrimeLab\n");
+                Console.Write("\t" + "Your Choice : ");
                 int temp = 0;
                 while (temp > 5 || temp < 1)
                 {
@@ -157,11 +159,12 @@ namespace PrimeLab
         }
         public static void ViewTheDetails()
         {
-            Console.WriteLine("The total number of generated prime numbers in the given range is: " + (endPoint - startPoint));
-            Console.WriteLine("The first generated prime number is: " + generatedPrimeNumbersR[startPoint]);
-            Console.WriteLine("The last generated prime number is: " + generatedPrimeNumbersR[endPoint]);
-            Console.WriteLine("The time taken for this task is: " + timeInfo);
-            Console.WriteLine("[PRESS 1] to get back to options");
+            Console.WriteLine("\t" + "The total number of generated prime numbers in the given range is: " + (endPoint - startPoint));
+            Console.WriteLine("\t" + "The first generated prime number is: " + generatedPrimeNumbersR[startPoint]);
+            Console.WriteLine("\t" + "The last generated prime number is: " + generatedPrimeNumbersR[endPoint]);
+            Console.WriteLine("\t" + "The time taken for this task is: " + timeInfo);
+            Console.WriteLine("\t" + "[PRESS 1] to get back to options\n ");
+            Console.Write("\t" + "Your Choice : ");
 
             int? temp = 0;
             while (temp != 1 || temp == null)

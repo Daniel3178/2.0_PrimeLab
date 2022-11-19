@@ -9,6 +9,7 @@ namespace PrimeLab
     internal class Menu
     {
         public static bool programIsActive = true;
+
         public static void Run()
         {
             ShowTheSummary();
@@ -23,7 +24,7 @@ namespace PrimeLab
         public static void OptionsManager()
         {
 
-            Console.WriteLine("Please Enter your choice: ");
+            Console.Write("\t"+"Your choice: ");
 
             int temp = 0;
             while (temp > 3 || temp < 1)
@@ -71,7 +72,7 @@ namespace PrimeLab
                     programIsActive = true;
                     break;
                 case 2:
-                    Console.WriteLine("you chose to exit");
+                    Console.WriteLine("\t"+"you chose to exit");
                     programIsActive = false;
                     break;
             }
@@ -88,7 +89,10 @@ namespace PrimeLab
         {
             Console.WriteLine("\t" + "[PRESS 1] PrimeLab");
             Console.WriteLine("\t" + "[PRESS 2] Manual");
-            Console.WriteLine("\t" + "[PRESS 3] Exit");
+            Console.WriteLine("\t" + "[PRESS 3] Exit\n");
+
+
+
         }
 
     }
