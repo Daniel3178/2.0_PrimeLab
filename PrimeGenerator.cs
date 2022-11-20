@@ -10,7 +10,7 @@ namespace PrimeLab
 {
     internal class PrimeGenerator : IOptions
     {
-        public static ulong[] GeneratedPrimeNumbers { get; set; }
+        // public static ulong[] GeneratedPrimeNumbers { get; set; }
         private static string? timeInfo;
         public static bool primeGeneratorOptionIsActive = false;
         public static bool primeGeneratorIsActive = false;
@@ -18,18 +18,21 @@ namespace PrimeLab
         public PrimeGenerator(int numberOfPrimesToGenerate)
         {
 
-            GeneratedPrimeNumbers = new ulong[numberOfPrimesToGenerate];
-            foreach (int i in GeneratedPrimeNumbers)
-            {
-                GeneratedPrimeNumbers[i] = 0;
-            }
-            GeneratedPrimeNumbers[0] = 2;
+            // GeneratedPrimeNumbers = new ulong[numberOfPrimesToGenerate];
+            // foreach (int i in GeneratedPrimeNumbers)
+            // {
+            //     GeneratedPrimeNumbers[i] = 0;
+            // }
+            // GeneratedPrimeNumbers[0] = 2;
         }
 
 
         public static void Run()
         {
+            ulong [] tempGeneratedPrimeNumbers;
             primeGeneratorIsActive = true;
+
+
             while (primeGeneratorIsActive)
             {
 
@@ -39,29 +42,34 @@ namespace PrimeLab
                 {
                     NumberOfPrimesToGenerate = Menu.GetTheUserChoice(Console.ReadLine());
                 }
-                Initializer(NumberOfPrimesToGenerate);
+                tempGeneratedPrimeNumbers =  Initializer(NumberOfPrimesToGenerate);
 
-                OptionsManager();
+                OptionsManager(tempGeneratedPrimeNumbers, tempGeneratedPrimeNumbers);
             }
 
 
         }
 
         #region:Initializer&OptionsManager
-        public static void Initializer(int input)
+        public static ulong [] Initializer(int input)
         {
 
-            PrimeGenerator primeGenerator = new PrimeGenerator(input);
+            // PrimeGenerator primeGenerator = new PrimeGenerator(input);
+
+            ulong[] temp = new ulong[input];
+            ulong[] modified;
+            temp[0] = 2;
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Start();
-            GeneratePrimeNumbers(input);
+            modified = GeneratePrimeNumbers(input, temp);
             stopwatch.Stop();
             timeInfo = stopwatch.ElapsedMilliseconds.ToString() + " ms";
 
             Console.WriteLine("\t" + "*** The task has been successfuly done!! ***\n");
+            return modified;
         }
 
-        public static void OptionsManager()
+        public static void OptionsManager(IEnumerable<ulong> input, ulong []inputArray)
         {
             primeGeneratorOptionIsActive = true;
             while (primeGeneratorOptionIsActive)
@@ -83,13 +91,13 @@ namespace PrimeLab
                 switch (temp)
                 {
                     case 1:
-                        ViewTheResult(GeneratedPrimeNumbers);
+                        ViewTheResult(input);
                         break;
                     case 2:
-                        SaveTheResult(GeneratedPrimeNumbers);
+                        SaveTheResult(input);
                         break;
                     case 3:
-                        ViewTheDetails();
+                        ViewTheDetails(inputArray);
                         break;
                     case 4:
                         primeGeneratorOptionIsActive = false;
@@ -136,11 +144,11 @@ namespace PrimeLab
 
         }
 
-        public static void ViewTheDetails()
+        public static void ViewTheDetails(ulong[]input)
         {
-            Console.WriteLine("\t" + "The total number of generated prime numbers is: " + GeneratedPrimeNumbers.Length);
-            Console.WriteLine("\t" + "The first generated prime number is: " + GeneratedPrimeNumbers[0]);
-            Console.WriteLine("\t" + "The last generated prime number is: " + GeneratedPrimeNumbers[GeneratedPrimeNumbers.Length - 1]);
+            Console.WriteLine("\t" + "The total number of generated prime numbers is: " + input.Length);
+            Console.WriteLine("\t" + "The first generated prime number is: " + input[0]);
+            Console.WriteLine("\t" + "The last generated prime number is: " + input[input.Length - 1]);
             Console.WriteLine("\t" + "The time taken for this task is: " + timeInfo);
             Console.WriteLine("\t" + "[PRESS 1] to get back to options\n");
             Console.Write("\t" + "Your Choice : ");
@@ -156,14 +164,15 @@ namespace PrimeLab
 
         #region:PrimeStuff
 
-        private static void GeneratePrimeNumbers(int numberOfPrimesToGenerate)
+        private static ulong [] GeneratePrimeNumbers(int numberOfPrimesToGenerate, ulong[]input)
         {
             int temp = 1;
+            ulong[] tempArray = input;
             for (ulong i = 3; i < ulong.MaxValue; i += 2)
             {
-                if (IsPrime(i) && temp < GeneratedPrimeNumbers.Length)
+                if (IsPrime(i, tempArray) && temp < tempArray.Length)
                 {
-                    GeneratedPrimeNumbers[temp] = i;
+                    tempArray[temp] = i;
                     temp++;
                 }
                 else if (temp == numberOfPrimesToGenerate)
@@ -171,13 +180,15 @@ namespace PrimeLab
                     break;
                 }
             }
+            return tempArray;
         }
 
-        private static bool IsPrime(ulong numToTest)
+        private static bool IsPrime(ulong numToTest, ulong [] primes)
         {
-            for (ulong i = 0; GeneratedPrimeNumbers[i] * GeneratedPrimeNumbers[i] <= numToTest; i++)
+            ulong [] temp = primes;
+            for (ulong i = 0; temp[i] * temp[i] <= numToTest; i++)
             {
-                if (GeneratedPrimeNumbers[i] > 0 && numToTest % GeneratedPrimeNumbers[i] == 0)
+                if (temp[i] > 0 && numToTest % temp[i] == 0)
                 {
                     return false;
                 }
