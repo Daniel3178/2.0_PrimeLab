@@ -90,7 +90,7 @@ namespace PrimeLab
         }
         public static void ViewTheResult(ulong input)
         {
-            Console.WriteLine($"The result of prime detector for number {input}" + theResult.ToString());
+            Console.WriteLine($"The result of prime detector for number is {input}  " + theResult.ToString());
             Console.WriteLine("\n\n");
 
         }

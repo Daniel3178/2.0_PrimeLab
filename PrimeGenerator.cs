@@ -10,26 +10,13 @@ namespace PrimeLab
 {
     internal class PrimeGenerator : IOptions
     {
-        // public static ulong[] GeneratedPrimeNumbers { get; set; }
         private static string? timeInfo;
         public static bool primeGeneratorOptionIsActive = false;
         public static bool primeGeneratorIsActive = false;
 
-        public PrimeGenerator(int numberOfPrimesToGenerate)
-        {
-
-            // GeneratedPrimeNumbers = new ulong[numberOfPrimesToGenerate];
-            // foreach (int i in GeneratedPrimeNumbers)
-            // {
-            //     GeneratedPrimeNumbers[i] = 0;
-            // }
-            // GeneratedPrimeNumbers[0] = 2;
-        }
-
-
         public static void Run()
         {
-            ulong [] tempGeneratedPrimeNumbers;
+            ulong[] tempGeneratedPrimeNumbers;
             primeGeneratorIsActive = true;
 
 
@@ -42,7 +29,7 @@ namespace PrimeLab
                 {
                     NumberOfPrimesToGenerate = Menu.GetTheUserChoice(Console.ReadLine());
                 }
-                tempGeneratedPrimeNumbers =  Initializer(NumberOfPrimesToGenerate);
+                tempGeneratedPrimeNumbers = Initializer(NumberOfPrimesToGenerate);
 
                 OptionsManager(tempGeneratedPrimeNumbers, tempGeneratedPrimeNumbers);
             }
@@ -51,7 +38,7 @@ namespace PrimeLab
         }
 
         #region:Initializer&OptionsManager
-        public static ulong [] Initializer(int input)
+        public static ulong[] Initializer(int input)
         {
 
             // PrimeGenerator primeGenerator = new PrimeGenerator(input);
@@ -59,6 +46,7 @@ namespace PrimeLab
             ulong[] temp = new ulong[input];
             ulong[] modified;
             temp[0] = 2;
+
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Start();
             modified = GeneratePrimeNumbers(input, temp);
@@ -69,7 +57,7 @@ namespace PrimeLab
             return modified;
         }
 
-        public static void OptionsManager(IEnumerable<ulong> input, ulong []inputArray)
+        public static void OptionsManager(IEnumerable<ulong> input, ulong[] inputArray)
         {
             primeGeneratorOptionIsActive = true;
             while (primeGeneratorOptionIsActive)
@@ -144,7 +132,7 @@ namespace PrimeLab
 
         }
 
-        public static void ViewTheDetails(ulong[]input)
+        public static void ViewTheDetails(ulong[] input)
         {
             Console.WriteLine("\t" + "The total number of generated prime numbers is: " + input.Length);
             Console.WriteLine("\t" + "The first generated prime number is: " + input[0]);
@@ -164,7 +152,7 @@ namespace PrimeLab
 
         #region:PrimeStuff
 
-        private static ulong [] GeneratePrimeNumbers(int numberOfPrimesToGenerate, ulong[]input)
+        private static ulong[] GeneratePrimeNumbers(int numberOfPrimesToGenerate, ulong[] input)
         {
             int temp = 1;
             ulong[] tempArray = input;
@@ -183,9 +171,9 @@ namespace PrimeLab
             return tempArray;
         }
 
-        private static bool IsPrime(ulong numToTest, ulong [] primes)
+        private static bool IsPrime(ulong numToTest, ulong[] primes)
         {
-            ulong [] temp = primes;
+            ulong[] temp = primes;
             for (ulong i = 0; temp[i] * temp[i] <= numToTest; i++)
             {
                 if (temp[i] > 0 && numToTest % temp[i] == 0)

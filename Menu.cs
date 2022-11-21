@@ -24,7 +24,7 @@ namespace PrimeLab
         public static void OptionsManager()
         {
 
-            Console.Write("\t"+"Your choice: ");
+            Console.Write("\t" + "Your choice: ");
 
             int temp = 0;
             while (temp > 3 || temp < 1)
@@ -72,7 +72,7 @@ namespace PrimeLab
                     programIsActive = true;
                     break;
                 case 2:
-                    Console.WriteLine("\t"+"you chose to exit");
+                    Console.WriteLine("\t" + "you chose to exit");
                     programIsActive = false;
                     break;
             }

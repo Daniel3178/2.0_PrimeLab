@@ -20,7 +20,7 @@ namespace PrimeLab
                 Console.WriteLine("\t" + "[PRESS 3] Check if a number is prime");
                 Console.WriteLine("\t" + "[PRESS 4] Prime factorizing a number");
                 Console.WriteLine("\t" + "[PRESS 5] Get back to menu\n");
-                Console.Write("\t" +"Your Choice : ");
+                Console.Write("\t" + "Your Choice : ");
 
                 int temp = 0;
                 while (temp > 5 || temp < 1)
@@ -37,7 +37,7 @@ namespace PrimeLab
 
                         break;
                     case 3:
-                        Console.WriteLine("you chose three");
+                        PrimeDetector.Run();
 
                         break;
                     case 4:
