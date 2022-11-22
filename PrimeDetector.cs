@@ -10,11 +10,13 @@ namespace PrimeLab
 {
     internal class PrimeDetector : IOptions
     {
+        #region:Fields
         public static bool primeDetectorIsActive = false;
         public static bool primeDetectorOptionIsActive = false;
         private static string? timeInfo;
         private static bool theResult;
         private enum Options { Show = 1, Save, Details, New, Back }
+        #endregion
         public static void Run()
         {
             primeDetectorIsActive = true;

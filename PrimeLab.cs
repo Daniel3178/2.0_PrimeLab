@@ -8,8 +8,10 @@ namespace PrimeLab
 {
     internal class PrimeLab
     {
+        #region:Fields
         private static bool primeLabIsActive = false;
         private enum Options { PrimeGenerator = 1, PrimeGeneratorInRange, PrimeDetector, PrimeFactorizer, Menu}
+        #endregion
         public static void Run()
         {
             primeLabIsActive = true;
