@@ -13,9 +13,9 @@ namespace PrimeLab
         private static int startPoint;
         private static int endPoint;
         private static string? timeInfo;
-        public static bool primeGenerator_RangIsActive = false;
-        public static bool primeGeneratorOption_RangIsActive = false;
-
+        private static bool primeGenerator_RangIsActive = false;
+        private static bool primeGeneratorOption_RangIsActive = false;
+        private enum Options { Show = 1, Save, Details, New, Back}
         public static void Run()
         {
             List<ulong> primeList;
@@ -37,6 +37,8 @@ namespace PrimeLab
                 OptionsManager(primeList);
             }
         }
+
+        #region:Initializer&OptionsManager
         private static List<ulong> Initializer(ulong start, ulong end)
         {
             List<ulong> tempPrimeListInRange;
@@ -46,10 +48,10 @@ namespace PrimeLab
             stopwatch.Stop();
             timeInfo = stopwatch.ElapsedMilliseconds.ToString() + "ms";
 
-            Console.WriteLine("\t" + "The task has been successfuly done!!");
+            Console.WriteLine();
+            Console.WriteLine("\t" + "*** The task has been successfuly done!! ***\n");
             return tempPrimeListInRange;
         }
-
         public static void OptionsManager(List<ulong> primeList)
         {
             primeGeneratorOption_RangIsActive = true;
@@ -69,19 +71,34 @@ namespace PrimeLab
                 }
                 switch (temp)
                 {
-                    case 1:
+                    case (int)Options.Show:
+                        Console.Clear();
+                        Menu.ShowTheSummary();
                         ViewTheResult(primeList);
                         break;
-                    case 2:
+
+                    case (int)Options.Save:
+                        Console.Clear();
+                        Menu.ShowTheSummary();
                         SaveTheResult(primeList);
                         break;
-                    case 3:
+
+                    case (int)Options.Details:
+                        Console.Clear();
+                        Menu.ShowTheSummary();
                         ViewTheDetails(primeList);
                         break;
-                    case 4:
+
+                    case (int)Options.New:
+                        Console.Clear();
+                        Menu.ShowTheSummary();
                         primeGeneratorOption_RangIsActive = false;
+                        GC.Collect();
                         break;
-                    case 5:
+
+                    case (int)Options.Back:
+                        Console.Clear();
+                        Menu.ShowTheSummary();
                         primeGeneratorOption_RangIsActive = false;
                         primeGenerator_RangIsActive = false;
                         break;
@@ -97,6 +114,63 @@ namespace PrimeLab
             }
             return temp;
         }
+        #endregion
+
+        #region:MethodsForCase1->3
+        public static void ViewTheResult(List<ulong> input)
+        {
+            Console.Clear();
+            Menu.ShowTheSummary();
+            Console.WriteLine("****************************************************************");
+            if (input != null)
+            {
+                for (int i = startPoint; i < endPoint; i++)
+                {
+                    Console.Write(input[i] + ", ");
+                }
+            }
+            Console.WriteLine("\n****************************************************************");
+            Console.WriteLine("\n");
+
+
+        }
+        public static void SaveTheResult(List<ulong> input)
+        {
+            Console.Clear();
+            Menu.ShowTheSummary();
+            if (input != null)
+            {
+                string tempS = "";
+                for (int i = startPoint; i < endPoint; i++)
+                {
+                    tempS += input[i].ToString() + ", ";
+                }
+                File.WriteAllText(@"F:\Programering Archive\SideProjects\2.0_PrimeLab\PrimeLab\SavedPrimeNumbers\PrimeNumbersInARange", tempS);
+            }
+            Console.WriteLine("\t" + "\t"+"Done!");
+        }
+        public static void ViewTheDetails(List<ulong> input)
+        {
+            Console.Clear();
+            Menu.ShowTheSummary();
+            Console.WriteLine("\t" + "The total number of generated prime numbers in the given range is: " + (endPoint - startPoint));
+            Console.WriteLine("\t" + "The first generated prime number is: " + input[startPoint]);
+            Console.WriteLine("\t" + "The last generated prime number is: " + input[endPoint]);
+            Console.WriteLine("\t" + "The time taken for this task is: " + timeInfo);
+            Console.WriteLine("\t" + "[PRESS 1] to get back to options\n ");
+            Console.Write("\t" + "Your Choice : ");
+
+            int? temp = 0;
+            while (temp != 1 || temp == null)
+            {
+                temp = Menu.GetTheUserChoice(Console.ReadLine());
+            }
+            Console.Clear();
+            Menu.ShowTheSummary();
+        }
+        #endregion
+
+        #region:PrimeStuff
         private static List<ulong> GeneratePrimeNumbersInRange(ulong start, ulong end)
         {
             List<ulong> theBasePrimeList = GenerateTheBasePrime(start);
@@ -130,52 +204,6 @@ namespace PrimeLab
             return theBasePrimeList;
 
         }
-
-        public static void ViewTheResult(List<ulong> input)
-        {
-            Console.WriteLine("****************************************************************");
-            if (input != null)
-            {
-                for (int i = startPoint; i < endPoint; i++)
-                {
-                    Console.Write(input[i] + ", ");
-                }
-            }
-            Console.WriteLine("\n****************************************************************");
-            Console.WriteLine("\n");
-
-
-        }
-        public static void SaveTheResult(List<ulong> input)
-        {
-            if (input != null)
-            {
-                string tempS = "";
-                for (int i = startPoint; i < endPoint; i++)
-                {
-                    tempS += input[i].ToString() + ", ";
-                }
-                File.WriteAllText(@"F:\Programering Archive\SideProjects\2.0_PrimeLab\PrimeLab\SavedPrimeNumbers\PrimeNumbersInARange", tempS);
-            }
-
-        }
-        public static void ViewTheDetails(List<ulong> input)
-        {
-            Console.WriteLine("\t" + "The total number of generated prime numbers in the given range is: " + (endPoint - startPoint));
-            Console.WriteLine("\t" + "The first generated prime number is: " + input[startPoint]);
-            Console.WriteLine("\t" + "The last generated prime number is: " + input[endPoint]);
-            Console.WriteLine("\t" + "The time taken for this task is: " + timeInfo);
-            Console.WriteLine("\t" + "[PRESS 1] to get back to options\n ");
-            Console.Write("\t" + "Your Choice : ");
-
-            int? temp = 0;
-            while (temp != 1 || temp == null)
-            {
-                temp = Menu.GetTheUserChoice(Console.ReadLine());
-            }
-
-        }
-
         private static List<ulong> GenerateTheBasePrime(ulong start)
         {
             List<ulong> theBasePrimeList = new List<ulong>();
@@ -193,8 +221,6 @@ namespace PrimeLab
             startPoint = theBasePrimeList.Count;
             return theBasePrimeList;
         }
-
-
         private static bool IsPrime(ulong numToTest, List<ulong> inputList)
         {
             for (int i = 0; inputList[i] * inputList[i] <= numToTest; i++)
@@ -206,5 +232,6 @@ namespace PrimeLab
             }
             return true;
         }
+        #endregion
     }
 }

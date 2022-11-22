@@ -8,19 +8,24 @@ namespace PrimeLab
 {
     internal class Menu
     {
-        public static bool programIsActive = true;
-
+        public static bool programIsActive = false;
+        private enum Options { Run = 1, Manual, Exit }
         public static void Run()
         {
-            ShowTheSummary();
+            programIsActive = true;
+            
             while (programIsActive)
             {
+                Console.Clear();
+                Menu.ShowTheSummary();
                 ShowTheOptionsDialog();
                 OptionsManager();
             }
-            Console.WriteLine("GoodBye!");
+            Console.WriteLine();
+            Console.WriteLine("\t"+ "\t" + "GoodBye!");
         }
 
+        #region:OptionsManager
         public static void OptionsManager()
         {
 
@@ -33,15 +38,16 @@ namespace PrimeLab
             }
             switch (temp)
             {
-                case 1:
+                case (int)Options.Run:
                     PrimeLab.Run();
-                    programIsActive = true;
                     break;
-                case 2:
+
+                case (int)Options.Manual:
                     ShowTheManual();
                     break;
-                case 3:
-                    Console.WriteLine("you chose to exit");
+
+                case (int)Options.Exit:
+                    Console.WriteLine("\t"+"You chose to exit");
                     programIsActive = false;
                     break;
             }
@@ -56,10 +62,15 @@ namespace PrimeLab
             }
             return temp;
         }
+        #endregion
 
+        #region:MethodsForDisplayingText
         public static void ShowTheManual()
         {
-            Console.WriteLine("This is the Manual");
+            Console.WriteLine("***This is the Manual***");
+            Console.WriteLine("\t" + "[PRESS 1] Get back to menu");
+            Console.WriteLine("\t" + "[PRESS 2] Exit\n");
+            Console.Write("\t" + "Your choice: ");
 
             int temp = 0;
             while (temp > 2 || temp < 1)
@@ -77,14 +88,12 @@ namespace PrimeLab
                     break;
             }
         }
-
         public static void ShowTheSummary()
         {
             System.Console.WriteLine("****************************************************************");
-            System.Console.WriteLine("\t" + "\t" + "      This is the summary");
+            System.Console.WriteLine("\t" + "\t" + "      This is the summary\n" + "\t" + "     Developed by Daniel Ibrahimi 22/11-22");
             System.Console.WriteLine("****************************************************************");
         }
-
         public static void ShowTheOptionsDialog()
         {
             Console.WriteLine("\t" + "[PRESS 1] PrimeLab");
@@ -94,6 +103,6 @@ namespace PrimeLab
 
 
         }
-
+        #endregion
     }
 }

@@ -10,9 +10,9 @@ namespace PrimeLab
     internal class PrimeFactorizer : IOptions
     {
         private static string? timeInfo;
-        public static bool primeFactorizerOptionIsActive = false;
-        public static bool primeFactorizerIsActive = false;
-
+        private static bool primeFactorizerOptionIsActive = false;
+        private static bool primeFactorizerIsActive = false;
+        private enum Options { Show = 1, Save, Details, New, Back }
         public static void Run()
         {
             primeFactorizerIsActive = true;
@@ -31,6 +31,7 @@ namespace PrimeLab
 
         }
 
+        #region:Initializer&OptionsManager
         private static List<ulong> Initializer(ulong numberToFactorize)
         {
             List<ulong> tempPrimeFactos;
@@ -39,15 +40,15 @@ namespace PrimeLab
             tempPrimeFactos = PrimeFactorize(numberToFactorize);
             stopwatch.Stop();
             timeInfo = stopwatch.ElapsedMilliseconds.ToString() + "ms";
+            Console.WriteLine();
+            Console.WriteLine("\t" + "*** The task has been successfuly done!! ***\n");
             return tempPrimeFactos;
         }
-
         public static void OptionsManager(List<ulong> primeFactors)
         {
             primeFactorizerOptionIsActive = true;
             while (primeFactorizerOptionIsActive)
             {
-
                 Console.WriteLine("\t" + "[PRESS 1] Show the result");
                 Console.WriteLine("\t" + "[PRESS 2] Save the result");
                 Console.WriteLine("\t" + "[PRESS 3] Show the details");
@@ -62,27 +63,33 @@ namespace PrimeLab
                 }
                 switch (temp)
                 {
-                    case 1:
+                    case (int)Options.Show:
                         ViewTheResult(primeFactors);
                         break;
-                    case 2:
+
+                    case (int)Options.Save:
                         SaveTheResult(primeFactors);
                         break;
-                    case 3:
+
+                    case (int)Options.Details:
                         ViewTheDetails(primeFactors);
                         break;
-                    case 4:
+
+                    case (int)Options.New:
+                        Console.Clear();
+                        Menu.ShowTheSummary();
                         primeFactorizerOptionIsActive = false;
                         break;
-                    case 5:
+
+                    case (int)Options.Back:
+                        Console.Clear();
+                        Menu.ShowTheSummary();
                         primeFactorizerOptionIsActive = false;
                         primeFactorizerIsActive = false;
                         break;
                 }
             }
         }
-
-
         private static ulong GetTheUserInput(string? input)
         {
             ulong temp;
@@ -92,9 +99,14 @@ namespace PrimeLab
             }
             return temp;
         }
+        #endregion
 
+        #region:MethodForCase1->3
         public static void ViewTheResult(IEnumerable<ulong> input)
         {
+            Console.Clear();
+            Menu.ShowTheSummary();
+
             if (input != null)
             {
                 foreach (ulong value in input)
@@ -108,6 +120,9 @@ namespace PrimeLab
 
         public static void SaveTheResult(IEnumerable<ulong> input)
         {
+            Console.Clear();
+            Menu.ShowTheSummary();
+
             if (input != null)
             {
                 string tempS = "";
@@ -117,11 +132,15 @@ namespace PrimeLab
                 }
                 File.WriteAllText(@"F:\Programering Archive\SideProjects\2.0_PrimeLab\PrimeLab\SavedPrimeNumbers\PrimeFactors", tempS);
             }
+            Console.WriteLine("\t" + "\t" + "Done!");
 
         }
 
         public static void ViewTheDetails(List<ulong> primeFactors)
         {
+            Console.Clear();
+            Menu.ShowTheSummary();
+
             Console.WriteLine("\t" + "The total number of generated prime factors is: " + primeFactors.Count);
             Console.WriteLine("\t" + "The least prime factor is: " + primeFactors[0]);
             Console.WriteLine("\t" + "The greatest prime factor is: " + primeFactors[primeFactors.Count - 1]);
@@ -134,22 +153,11 @@ namespace PrimeLab
             {
                 temp = Menu.GetTheUserChoice(Console.ReadLine());
             }
-
+            
         }
+        #endregion
 
-
-
-        //static int GCD(int num1, int num2)
-        //{
-        //    while (num2 != 0)
-        //    {
-        //        int remainder = num1 % num2;
-        //        num1 = num2;
-        //        num2 = remainder;
-        //    }
-        //    return num1;
-        //}
-
+        #region:PrimeStuff
         static List<ulong> PrimeFactorize(ulong num)
         {
             List<ulong> primeFactors = new List<ulong>();
@@ -177,22 +185,6 @@ namespace PrimeLab
             }
             return primeFactors;
         }
-
-        static bool isPrime(ulong num)
-        {
-            if (num % 2 == 0)
-            {
-                return false;
-            }
-
-            for (ulong i = 3; i * i <= num; i += 2)
-            {
-                if (num % i == 0)
-                {
-                    return false;
-                }
-            }
-            return true;
-        }
+        #endregion
     }
 }

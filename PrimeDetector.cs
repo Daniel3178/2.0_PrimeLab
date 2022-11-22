@@ -14,7 +14,7 @@ namespace PrimeLab
         public static bool primeDetectorOptionIsActive = false;
         private static string? timeInfo;
         private static bool theResult;
-
+        private enum Options { Show = 1, Save, Details, New, Back }
         public static void Run()
         {
             primeDetectorIsActive = true;
@@ -30,17 +30,19 @@ namespace PrimeLab
                 OptionsManager(input);
             }
         }
+
+        #region:Initializer&OptionsManager
         public static void Initializer(ulong input)
         {
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Start();
-            theResult = isPrime(input);
+            theResult = IsPrime(input);
             stopwatch.Stop();
 
             timeInfo = stopwatch.ElapsedMilliseconds.ToString() + "ms";
-
+            Console.WriteLine();
+            Console.WriteLine("\t" + "*** The task has been successfuly done!! ***\n");
         }
-
         public static void OptionsManager(ulong input)
         {
             primeDetectorOptionIsActive = true;
@@ -60,19 +62,23 @@ namespace PrimeLab
                 }
                 switch (temp)
                 {
-                    case 1:
+                    case (int)Options.Show:
                         ViewTheResult(input);
                         break;
-                    case 2:
+
+                    case (int)Options.Save:
                         SaveTheResult(input);
                         break;
-                    case 3:
+
+                    case (int)Options.Details:
                         ViewTheDetails();
                         break;
-                    case 4:
+
+                    case (int)Options.New:
                         primeDetectorOptionIsActive = false;
                         break;
-                    case 5:
+
+                    case (int)Options.Back:
                         primeDetectorOptionIsActive = false;
                         primeDetectorIsActive = false;
                         break;
@@ -88,25 +94,33 @@ namespace PrimeLab
             }
             return temp;
         }
+        #endregion
+
+        #region:MehtodsForCase1->3
         public static void ViewTheResult(ulong input)
         {
+            Console.Clear();
+            Menu.ShowTheSummary();
             Console.WriteLine($"The result of prime detector for number is {input}  " + theResult.ToString());
             Console.WriteLine("\n\n");
 
         }
         public static void SaveTheResult(ulong input)
         {
-
+            Console.Clear();
+            Menu.ShowTheSummary();
 
             string tempS = $"The result of prime detector for number {input}" + theResult.ToString();
 
             File.WriteAllText(@"F:\Programering Archive\SideProjects\2.0_PrimeLab\PrimeLab\SavedPrimeNumbers\PrimeDetector", tempS);
+            Console.WriteLine("\t" + "\t" + "Done!");
 
         }
         public static void ViewTheDetails()
         {
 
-
+            Console.Clear();
+            Menu.ShowTheSummary();
             Console.WriteLine("The time taken for this task is: " + timeInfo);
             Console.WriteLine("[PRESS 1] to get back to options");
 
@@ -115,9 +129,12 @@ namespace PrimeLab
             {
                 temp = Menu.GetTheUserChoice(Console.ReadLine());
             }
-
+            
         }
-        static bool isPrime(ulong num)
+        #endregion
+
+        #region:PrimeStuff
+        static bool IsPrime(ulong num)
         {
             if (num % 2 == 0)
             {
@@ -133,5 +150,6 @@ namespace PrimeLab
             }
             return true;
         }
+        #endregion
     }
 }

@@ -8,13 +8,15 @@ namespace PrimeLab
 {
     internal class PrimeLab
     {
-        public static bool primeLabIsActive = false;
+        private static bool primeLabIsActive = false;
+        private enum Options { PrimeGenerator = 1, PrimeGeneratorInRange, PrimeDetector, PrimeFactorizer, Menu}
         public static void Run()
         {
             primeLabIsActive = true;
             while (primeLabIsActive)
             {
-
+                Console.Clear();
+                Menu.ShowTheSummary();
                 Console.WriteLine("\t" + "[PRESS 1] Generate the first n prime numbers");
                 Console.WriteLine("\t" + "[PRESS 2] Generate prime numbers in a specific range");
                 Console.WriteLine("\t" + "[PRESS 3] Check if a number is prime");
@@ -29,31 +31,36 @@ namespace PrimeLab
                 }
                 switch (temp)
                 {
-                    case 1:
+                    case (int)Options.PrimeGenerator:
+                        Console.Clear();
+                        Menu.ShowTheSummary();
                         PrimeGenerator.Run();
                         break;
-                    case 2:
+
+                    case (int)Options.PrimeGeneratorInRange:
+                        Console.Clear();
+                        Menu.ShowTheSummary();
                         PrimeGenerator_Range.Run();
-
                         break;
-                    case 3:
+
+                    case (int)Options.PrimeDetector:
+                        Console.Clear();
+                        Menu.ShowTheSummary();
                         PrimeDetector.Run();
-
                         break;
-                    case 4:
+
+                    case (int)Options.PrimeFactorizer:
+                        Console.Clear();
+                        Menu.ShowTheSummary();
                         PrimeFactorizer.Run();
-
                         break;
 
-                    case 5:
+                    case (int)Options.Menu:
                         primeLabIsActive = false;
                         break;
 
                 }
             }
-
-
-
         }
 
     }
