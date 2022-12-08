@@ -15,6 +15,7 @@ namespace PrimeLab
         private enum Options { Show = 1, Save, Details, New, Back }
         public static void Run()
         {
+            
             primeFactorizerIsActive = true;
             List<ulong> primeFactors;
             while (primeFactorizerIsActive)
