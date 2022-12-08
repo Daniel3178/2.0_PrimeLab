@@ -10,10 +10,12 @@ namespace PrimeLab
 {
     internal class PrimeGenerator : IOptions
     {
+        #region:Fields
         private static string? timeInfo;
         private static bool primeGeneratorOptionIsActive = false;
         private static bool primeGeneratorIsActive = false;
         private enum Options { Show = 1, Save, Details, New, Back }
+        #endregion
         public static void Run()
         {
             ulong[] tempGeneratedPrimeNumbers;

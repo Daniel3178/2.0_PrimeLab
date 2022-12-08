@@ -10,12 +10,14 @@ namespace PrimeLab
 {
     internal class PrimeGenerator_Range : IOptions
     {
+        #region:Fields
         private static int startPoint;
         private static int endPoint;
         private static string? timeInfo;
         private static bool primeGenerator_RangIsActive = false;
         private static bool primeGeneratorOption_RangIsActive = false;
         private enum Options { Show = 1, Save, Details, New, Back}
+        #endregion
         public static void Run()
         {
             List<ulong> primeList;

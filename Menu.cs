@@ -8,8 +8,10 @@ namespace PrimeLab
 {
     internal class Menu
     {
+        #region:Fields
         public static bool programIsActive = false;
         private enum Options { Run = 1, Manual, Exit }
+        #endregion
         public static void Run()
         {
             programIsActive = true;

@@ -9,10 +9,12 @@ namespace PrimeLab
 {
     internal class PrimeFactorizer : IOptions
     {
+        #region:Fields
         private static string? timeInfo;
         private static bool primeFactorizerOptionIsActive = false;
         private static bool primeFactorizerIsActive = false;
         private enum Options { Show = 1, Save, Details, New, Back }
+        #endregion
         public static void Run()
         {
             
